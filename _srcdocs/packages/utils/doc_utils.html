@@ -1,0 +1,185 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>doc_utils.py &#8212; dymos 0.15.1-dev documentation</title>
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hermite.py" href="hermite.html" />
+    <link rel="prev" title="constants.py" href="constants.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hermite.html" title="hermite.py"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="constants.html" title="constants.py"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">dymos 0.15.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Source Docs</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../dymos.utils.html" accesskey="U">dymos.utils</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">doc_utils.py</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-dymos.utils.doc_utils">
+<span id="doc-utils-py"></span><span id="dymos-utils-doc-utils-py"></span><span id="index-0"></span><h1>doc_utils.py<a class="headerlink" href="#module-dymos.utils.doc_utils" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="dymos.utils.doc_utils.save_for_docs">
+<code class="sig-prename descclassname">dymos.utils.doc_utils.</code><code class="sig-name descname">save_for_docs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span></em>, <em class="sig-param"><span class="n">transparent</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#save_for_docs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.save_for_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator used to save output and matplotlib figures from tests to be used in documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>method</strong><span class="classifier">callable</span></dt><dd><p>The wrapped test method.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>A wrapped version of method which runs the test method while doing the following:</strong><span class="classifier"></span></dt><dd></dd>
+<dt><strong>- Creates a new directory `_output` in the test file’s directory.</strong><span class="classifier"></span></dt><dd></dd>
+<dt><strong>- Echoes all stdout and stderr to a file named ‘{classname}.{testname}.out’ within the _output directory</strong><span class="classifier"></span></dt><dd></dd>
+<dt><strong>- Switches the matplotlib backend to ‘Agg’</strong><span class="classifier"></span></dt><dd></dd>
+<dt><strong>- Saves all matplotlib figures created during the test to ‘{classname}.{testname}_{i}.png’</strong><span class="classifier"></span></dt><dd></dd>
+<dt><strong>- Restores the backend, stdout, and stderr.</strong><span class="classifier"></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="dymos.utils.doc_utils.tee">
+<em class="property">class </em><code class="sig-prename descclassname">dymos.utils.doc_utils.</code><code class="sig-name descname">tee</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">files</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#tee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.tee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mimics the behavior of the linux tee command by allowing the user to create new streams
+that output to multiple destinations.</p>
+<p>For instance:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">stdout_save</span> <span class="pre">=</span> <span class="pre">sys.stdout</span>
+<span class="pre">sys.stdout</span> <span class="pre">=</span> <span class="pre">tee(sys.stdout,</span> <span class="pre">f)</span>
+<span class="pre">print(foo)</span>
+<span class="pre">sys.stdout</span> <span class="pre">=</span> <span class="pre">stdout_save</span>
+<span class="pre">`</span></code></p>
+<p>Will print foo to both stdout and the stream f.</p>
+<dl class="py method">
+<dt id="dymos.utils.doc_utils.tee.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">files</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#tee.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.tee.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dymos.utils.doc_utils.tee.flush">
+<code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#tee.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.tee.flush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="dymos.utils.doc_utils.tee.getvalue">
+<code class="sig-name descname">getvalue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#tee.getvalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.tee.getvalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This exists only so pycharm won’t have issues with the class if an exception is raised.</p>
+<p>Call getvalue on the first stream.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dymos.utils.doc_utils.tee.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dymos/utils/doc_utils.html#tee.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dymos.utils.doc_utils.tee.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="constants.html"
+                        title="previous chapter">constants.py</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hermite.html"
+                        title="next chapter">hermite.py</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/_srcdocs/packages/utils/doc_utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hermite.html" title="hermite.py"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="constants.html" title="constants.py"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">dymos 0.15.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Source Docs</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../dymos.utils.html" >dymos.utils</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">doc_utils.py</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, National Aeronautics and Space Administration.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+    </div>
+  </body>
+</html>
